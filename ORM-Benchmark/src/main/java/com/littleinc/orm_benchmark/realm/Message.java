@@ -2,14 +2,13 @@ package com.littleinc.orm_benchmark.realm;
 import com.littleinc.orm_benchmark.util.Util;
 
 import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.Index;
 
 /**
  * Created by kgalligan on 6/17/15.
  */
 public class Message extends RealmObject
 {
-    @PrimaryKey
     private int id;
     private long clientId;
     private long commandId;

@@ -56,8 +56,8 @@ public class RealmExecutor implements BenchmarkExecutable
         for (int i = 0; i < NUM_USER_INSERTS; i++) {
             User newUser = new User();
             newUser.setId(i);
-            newUser.setmLastName(getRandomString(10));
-            newUser.setmFirstName(getRandomString(10));
+            newUser.setLastName(getRandomString(10));
+            newUser.setFirstName(getRandomString(10));
 
             users.add(newUser);
         }
@@ -87,7 +87,10 @@ public class RealmExecutor implements BenchmarkExecutable
 
         for(User newUser : users)
         {
-            realm.copyToRealm(newUser);
+            User realmUser = realm.createObject(User.class);
+            realmUser.setId(newUser.getId());
+            realmUser.setFirstName(newUser.getFirstName());
+            realmUser.setLastName(newUser.getLastName());
         }
 
         String userLog = "Done, wrote " + NUM_USER_INSERTS + " users" + (System.nanoTime() - start);
@@ -96,14 +99,21 @@ public class RealmExecutor implements BenchmarkExecutable
 
         for(Message message : messages)
         {
-            realm.copyToRealm(message);
+            Message realmMessage = realm.createObject(Message.class);
+            realmMessage.setId(message.getId());
+            realmMessage.setChannelId(message.getChannelId());
+            realmMessage.setClientId(message.getClientId());
+            realmMessage.setCommandId(message.getCommandId());
+            realmMessage.setContent(message.getContent());
+            realmMessage.setCreatedAt(message.getCreatedAt());
+            realmMessage.setSenderId(message.getSenderId());
         }
 
         realm.commitTransaction();
 
         long totalTime = System.nanoTime() - start;
 
-        realm.close();
+//        realm.close();
 
         Log.d(TAG, userLog);
         Log.d(TAG, "Done, wrote " + NUM_MESSAGE_INSERTS + " messages"  + (System.nanoTime() - messageStart));
@@ -123,8 +133,8 @@ public class RealmExecutor implements BenchmarkExecutable
         for(User user : userResults)
         {
             int id = user.getId();
-            String first =  user.getmFirstName();
-            String last = user.getmLastName();
+            String first =  user.getFirstName();
+            String last = user.getLastName();
         }
 
         String userLog = "Read " + NUM_USER_INSERTS + " users in " + (System.nanoTime() - start);
@@ -147,7 +157,7 @@ public class RealmExecutor implements BenchmarkExecutable
 
         long totalTime = System.nanoTime() - start;
 
-        realm.close();
+//        realm.close();
         Log.d(TAG, userLog);
         Log.d(TAG,
               "Read " + NUM_MESSAGE_INSERTS + " messages in " + (System.nanoTime() - messageStart));
@@ -178,7 +188,7 @@ public class RealmExecutor implements BenchmarkExecutable
         realm.where(Message.class).findAll().clear();
         realm.commitTransaction();
 
-        realm.close();
+//        realm.close();
         return System.nanoTime() - start;
     }
 }
