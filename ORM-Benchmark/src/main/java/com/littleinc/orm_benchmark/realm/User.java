@@ -1,19 +1,14 @@
 package com.littleinc.orm_benchmark.realm;
 import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
-
-
-import static com.littleinc.orm_benchmark.util.Util.getRandomString;
 
 /**
  * Created by kgalligan on 6/17/15.
  */
 public class User extends RealmObject
 {
-    @PrimaryKey
     private int id;
-    private String mLastName;
-    private String mFirstName;
+    private String lastName;
+    private String firstName;
 
     public int getId()
     {
@@ -25,23 +20,23 @@ public class User extends RealmObject
         this.id = mId;
     }
 
-    public String getmLastName()
+    public String getLastName()
     {
-        return mLastName;
+        return lastName;
     }
 
-    public void setmLastName(String mLastName)
+    public void setLastName(String mLastName)
     {
-        this.mLastName = mLastName;
+        this.lastName = mLastName;
     }
 
-    public String getmFirstName()
+    public String getFirstName()
     {
-        return mFirstName;
+        return firstName;
     }
 
-    public void setmFirstName(String mFirstName)
+    public void setFirstName(String mFirstName)
     {
-        this.mFirstName = mFirstName;
+        this.firstName = mFirstName;
     }
 }

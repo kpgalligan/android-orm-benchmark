@@ -56,8 +56,8 @@ public class RealmExecutor implements BenchmarkExecutable
         for (int i = 0; i < NUM_USER_INSERTS; i++) {
             User newUser = new User();
             newUser.setId(i);
-            newUser.setmLastName(getRandomString(10));
-            newUser.setmFirstName(getRandomString(10));
+            newUser.setLastName(getRandomString(10));
+            newUser.setFirstName(getRandomString(10));
 
             users.add(newUser);
         }
@@ -123,8 +123,8 @@ public class RealmExecutor implements BenchmarkExecutable
         for(User user : userResults)
         {
             int id = user.getId();
-            String first =  user.getmFirstName();
-            String last = user.getmLastName();
+            String first =  user.getFirstName();
+            String last = user.getLastName();
         }
 
         String userLog = "Read " + NUM_USER_INSERTS + " users in " + (System.nanoTime() - start);
